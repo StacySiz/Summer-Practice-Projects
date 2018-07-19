@@ -24,8 +24,16 @@ module.exports = function(app) {
                 if (weather.main == undefined) {
                     res.render('index', {weather: null, error: 'Something went wrong , please try again2',user:null});
                 } else {
-                    let weatherResult = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-                    res.render('index', {weather: weatherResult, error: null,user:null});
+                    let weatherResult = `There is ${weather.main.temp} degrees in ${weather.name}!`;
+                    //let weatherResult2 =  ${weather.main.temp} degrees in ${weather.name}!`;
+                    console.log(weatherResult);
+                    res.send(weather);
+                    // if (!user) {
+                    //     res.render('index', {weather: weather, error: null, user: user});
+                    // }
+                    // else {
+                        res.render('index', {weather: weather, error: null, user: null});
+                    //}
                 }
             }
         });

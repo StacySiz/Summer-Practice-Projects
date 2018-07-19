@@ -18,9 +18,9 @@ exports.create = (req, res) => {
       password: hashedPassword
 	}).then(user => {
 	    const token = jwt.sign({id: user.id},jwtInfo.JWT_SECRET,{expiresIn:jwtInfo.tokenLife})//exp in 24 hours
-		//res.send(user);
+		res.send(user);
        // res.status(200).send({auth:true,token:token})
-        res.redirect("/weather");
+        //res.redirect("/weather");
 	});
 };
 
@@ -30,9 +30,11 @@ exports.findOne = (req,res) => {
         const validPassword = bcrypt.compareSync(req.body.password,user.password);
         if (!validPassword) return res.status(401).send({ auth: false, token: null });
         const token = jwt.sign({id: user.id},jwtInfo.JWT_SECRET,{expiresIn:jwtInfo.tokenLife});
-        console.log(user.email);
+        //let status = JSON.parse(body)
+        res.send(user);
         //res.status(200).send({ auth: true, token: token });
-        res.redirect('/weather');
+        res.status(200).render('index',{ user: user,weather:null,error:null, token: token });
+       // res.redirect('/weather');
     })
 
 };

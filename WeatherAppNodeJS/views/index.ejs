@@ -10,7 +10,7 @@
   <div class="container">
     <fieldset>
         <% if(user !== null){ %>
-      <p>Great to see you again <%= user %></p>
+      <p>Great to see you again, <%= user.firstname %></p>
       <p>Check the weather!</p>
         <% } %>
       <form action="/weather" method="post">
